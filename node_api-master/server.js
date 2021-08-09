@@ -34,6 +34,18 @@ function authenticateUser(req, res, next) {
     }
 }
 
+function checkAuth (req,res,next){
+    if (!req.session.email) {
+        res.send('You are not authorized to view this page');
+      } else {
+        next();
+      }
+}
+
+app.use('/pub', checkAuth);
+app.use('/api', checkAuth);
+
+
 router.get('/', (req, res) => {
     userSession = req.session;
     if (userSession.email) {
