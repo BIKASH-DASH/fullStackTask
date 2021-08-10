@@ -44,6 +44,7 @@ function checkAuth (req,res,next){
 
 app.use('/pub', checkAuth);
 app.use('/api', checkAuth);
+app.use('/save', checkAuth);
 
 
 router.get('/', (req, res) => {
@@ -84,6 +85,7 @@ router.get('/data', (req, res, next) => {
 
 
 router.post('/save/:id', function (req, res) {
+    console.log(req.body);
     if (!fs.existsSync(`${__dirname}/data`)) {
         fs.mkdirSync(`${__dirname}/data`);
     }
